@@ -1,0 +1,37 @@
+Index(['PMID', 'PMID_Version', 'Title', 'Status', 'IndexingMethod', 'Owner',
+       'Abstract', 'Journal_Title', 'ISSN', 'ISSN_Type', 'Volume', 'Issue',
+       'CitedMedium', 'PubDate_Year', 'PubDate_Month', 'PubDate_Day',
+       'Pagination', 'Authors', 'PublicationTypes', 'Chemicals',
+       'MeSHHeadings_Full', 'MeSH_Descriptors', 'MeSH_Qualifiers',
+       'MeSH_MajorTopics', 'Grants', 'DateCompleted', 'DateRevised',
+       'PublicationHistory', 'ArticleIDs'],
+      dtype='object')
+PMID: 1
+PMID_Version: 1
+Title: Formate assay in body fluids: application in methanol poisoning.
+Status: MEDLINE
+IndexingMethod: Manual
+Owner: NLM
+Abstract: nan
+Journal_Title: Biochemical medicine
+ISSN: 0006-2944
+ISSN_Type: Print
+Volume: 13
+Issue: 2
+CitedMedium: Print
+PubDate_Year: 1975.0
+PubDate_Month: Jun
+PubDate_Day: nan
+Pagination: 117-26
+Authors: A B Makar (AB); K E McMartin (KE); M Palese (M); T R Tephly (TR)
+PublicationTypes: Journal Article (D016428); Research Support, U.S. Gov't, P.H.S. (D013487)
+Chemicals: Formates (Registry: 0, UI: D005561); Carbon Dioxide (Registry: 142M471B3J, UI: D002245); Aldehyde Oxidoreductases (Registry: EC 1.2.-, UI: D000445); Methanol (Registry: Y4S76JWI15, UI: D000432)
+MeSHHeadings_Full: Aldehyde Oxidoreductases (UI: D000445, Major: No) - Qualifiers: metabolism (UI: Q000378, Major: No); Animals (UI: D000818, Major: No); Body Fluids (UI: D001826, Major: No) - Qualifiers: analysis (UI: Q000032, Major: Yes); Carbon Dioxide (UI: D002245, Major: No) - Qualifiers: blood (UI: Q000097, Major: No); Formates (UI: D005561, Major: No) - Qualifiers: blood (UI: Q000097, Major: No); poisoning (UI: Q000506, Major: Yes); Haplorhini (UI: D000882, Major: No); Humans (UI: D006801, Major: No); Hydrogen-Ion Concentration (UI: D006863, Major: No); Kinetics (UI: D007700, Major: No); Methanol (UI: D000432, Major: No) - Qualifiers: blood (UI: Q000097, Major: No); Methods (UI: D008722, Major: No); Pseudomonas (UI: D011549, Major: No) - Qualifiers: enzymology (UI: Q000201, Major: No)
+MeSH_Descriptors: Aldehyde Oxidoreductases|Animals|Body Fluids|Carbon Dioxide|Formates|Haplorhini|Humans|Hydrogen-Ion Concentration|Kinetics|Methanol|Methods|Pseudomonas
+MeSH_Qualifiers: metabolism (0)||analysis (1)|blood (0)|blood (0); poisoning (1)|||||blood (0)||enzymology (0)
+MeSH_MajorTopics: 0|0|0|0|0|0|0|0|0|0|0|0
+Grants: ID: F32 AG064886, Acronym: AG, Agency: NIA NIH HHS, Country: United States; ID: MC_UU_12013/5, Agency: MRC, Country: United Kingdom
+DateCompleted: 1976-01-16
+DateRevised: 2024-01-09
+PublicationHistory: pubmed: 1975-6-1; medline: 1975-6-1 0:1; entrez: 1975-6-1 0:0
+ArticleIDs: pubmed: 1; doi: 10.1016/0006-2944(75)90147-7
