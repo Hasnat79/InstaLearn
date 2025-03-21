@@ -1,6 +1,6 @@
 import pandas as pd
 import argparse
-
+from tqdm import tqdm
 # Set up argument parser
 parser = argparse.ArgumentParser(description='Filter abstracts based on cardio MeSH qualifiers.')
 parser.add_argument('--input_file', type=str, help='Path to the input CSV file')
@@ -13,7 +13,7 @@ output_file = args.output_file
 
 # Load the CSV file
 df = pd.read_csv(input_file)
-print(df.describe())
+# print(df.describe())
 
 qualifier_terms_cardio_diseases = [
     "blood",
@@ -52,141 +52,157 @@ qualifier_terms_cardio_diseases = [
     "virology"
 ]
 
-mesh_descriptor_terms_cardio_diseases = [
-    "Cerebrovascular Disorders",
-    "Myocardial Ischemia",
-    "Cardiomyopathies",
-    "Heart Failure",
-    "Arrhythmias, Cardiac",
-    "Heart Valve Diseases",
-    "Heart Defects, Congenital",
-    "Basal Ganglia Cerebrovascular Disease",
-    "Brain Ischemia",
-    "Carotid Artery Diseases",
-    "Cerebral Small Vessel Diseases",
-    "Cerebrovascular Trauma",
-    "Dementia, Vascular",
-    "Intracranial Arterial Diseases",
-    "Intracranial Arteriovenous Malformations",
-    "Intracranial Embolism and Thrombosis",
-    "Intracranial Hemorrhages",
-    "Leukomalacia, Periventricular",
-    "Sneddon Syndrome",
-    "Stroke",
-    "Susac Syndrome",
-    "Vascular Headaches",
-    "Vasculitis, Central Nervous System",
-    "Vasospasm, Intracranial",
-    "Cerebrovascular Disorders",
-    "Acute Coronary Syndrome",
-    "Angina Pectoris",
-    "Coronary Disease",
-    "Kounis Syndrome",
-    "Myocardial Infarction",
-    "Myocardial Reperfusion Injury",
-    "Myocardial Ischemia",
-    "Arrhythmogenic Right Ventricular Dysplasia",
-    "Cardiomyopathy, Alcoholic",
-    "Cardiomyopathy, Dilated",
-    "Cardiomyopathy, Hypertrophic",
-    "Cardiomyopathy, Restrictive",
-    "Chagas Cardiomyopathy",
-    "Diabetic Cardiomyopathies",
-    "Endocardial Fibroelastosis",
-    "Endomyocardial Fibrosis",
-    "Glycogen Storage Disease Type IIb",
-    "Kearns-Sayre Syndrome",
-    "Myocardial Reperfusion Injury",
-    "Myocarditis",
-    "Sarcoglycanopathies",
-    "Cardio-Renal Syndrome",
-    "Dyspnea, Paroxysmal",
-    "Edema, Cardiac",
-    "Heart Failure, Diastolic",
-    "Heart Failure, Systolic",
-    "Cardiomyopathies",
-    "Heart Failure",
-    "Arrhythmia, Sinus",
-    "Atrial Fibrillation",
-    "Atrial Flutter",
-    "Bradycardia",
-    "Brugada Syndrome",
-    "Cardiac Complexes, Premature",
-    "Commotio Cordis",
-    "Heart Block",
-    "Long QT Syndrome",
-    "Parasystole",
-    "Pre-Excitation Syndromes",
-    "Tachycardia",
-    "Ventricular Fibrillation",
-    "Ventricular Flutter",
-    "Arrhythmias, Cardiac",
-    "Aortic Valve Insufficiency",
-    "Aortic Valve Stenosis",
-    "Heart Valve Prolapse",
-    "Mitral Valve Insufficiency",
-    "Mitral Valve Stenosis",
-    "Pulmonary Atresia",
-    "Pulmonary Valve Insufficiency",
-    "Pulmonary Valve Stenosis",
-    "Tricuspid Atresia",
-    "Tricuspid Valve Insufficiency",
-    "Tricuspid Valve Stenosis",
-    "Heart Valve Diseases",
-    "22q11 Deletion Syndrome",
-    "Alagille Syndrome",
-    "Aortic Coarctation",
-    "Arrhythmogenic Right Ventricular Dysplasia",
-    "Barth Syndrome",
-    "Cor Triatriatum",
-    "Coronary Vessel Anomalies",
-    "Crisscross Heart",
-    "Dextrocardia",
-    "Ductus Arteriosus, Patent",
-    "Ebstein Anomaly",
-    "Ectopia Cordis",
-    "Eisenmenger Complex",
-    "Heart Septal Defects",
-    "Heterotaxy Syndrome",
-    "Hypoplastic Left Heart Syndrome",
-    "Isolated Noncompaction of the Ventricular Myocardium",
-    "LEOPARD Syndrome",
-    "Levocardia",
-    "Long QT Syndrome",
-    "Marfan Syndrome",
-    "Noonan Syndrome",
-    "Tetralogy of Fallot",
-    "Transposition of Great Vessels",
-    "Tricuspid Atresia",
-    "Trilogy of Fallot",
-    "Trisomy 13 Syndrome",
-    "Trisomy 18 Syndrome",
-    "Turner Syndrome",
-    "Wolff-Parkinson-White Syndrome",
-    "Heart Defects, Congenital"
-]
-print(df.columns)
+mesh_descriptor_terms_cardio_cat = {
+    "Cerebrovascular Disorders": [
+        "Basal Ganglia Cerebrovascular Disease",
+        "Brain Ischemia",
+        "Carotid Artery Diseases",
+        "Cerebral Small Vessel Diseases",
+        "Cerebrovascular Trauma",
+        "Dementia, Vascular",
+        "Intracranial Arterial Diseases",
+        "Intracranial Arteriovenous Malformations",
+        "Intracranial Embolism and Thrombosis",
+        "Intracranial Hemorrhages",
+        "Leukomalacia, Periventricular",
+        "Sneddon Syndrome",
+        "Stroke",
+        "Susac Syndrome",
+        "Vascular Headaches",
+        "Vasculitis, Central Nervous System",
+        "Vasospasm, Intracranial",
+        "Cerebrovascular Disorders"
+    ],
+    "Myocardial Ischemia": [
+        "Acute Coronary Syndrome",
+        "Angina Pectoris",
+        "Coronary Disease",
+        "Kounis Syndrome",
+        "Myocardial Infarction",
+        "Myocardial Reperfusion Injury",
+        "Myocardial Ischemia"
+    ],
+    "Cardiomyopathies": [
+        "Arrhythmogenic Right Ventricular Dysplasia",
+        "Cardiomyopathy, Alcoholic",
+        "Cardiomyopathy, Dilated",
+        "Cardiomyopathy, Hypertrophic",
+        "Cardiomyopathy, Restrictive",
+        "Chagas Cardiomyopathy",
+        "Diabetic Cardiomyopathies",
+        "Endocardial Fibroelastosis",
+        "Endomyocardial Fibrosis",
+        "Glycogen Storage Disease Type IIb",
+        "Kearns-Sayre Syndrome",
+        "Myocardial Reperfusion Injury",
+        "Myocarditis",
+        "Sarcoglycanopathies",
+        "Cardio-Renal Syndrome",
+        "Dyspnea, Paroxysmal",
+        "Edema, Cardiac",
+        "Heart Failure, Diastolic",
+        "Heart Failure, Systolic"
+    ],
+    "Heart Failure": [
+        "Cardio-Renal Syndrome",
+        "Dyspnea, Paroxysmal",
+        "Edema, Cardiac",
+        "Heart Failure, Diastolic",
+        "Heart Failure, Systolic"
+    ],
+    "Arrhythmias, Cardiac": [
+        "Arrhythmia, Sinus",
+        "Atrial Fibrillation",
+        "Atrial Flutter",
+        "Bradycardia",
+        "Brugada Syndrome",
+        "Cardiac Complexes, Premature",
+        "Commotio Cordis",
+        "Heart Block",
+        "Long QT Syndrome",
+        "Parasystole",
+        "Pre-Excitation Syndromes",
+        "Tachycardia",
+        "Ventricular Fibrillation",
+        "Ventricular Flutter"
+    ],
+    "Heart Valve Diseases": [
+        "Aortic Valve Insufficiency",
+        "Aortic Valve Stenosis",
+        "Heart Valve Prolapse",
+        "Mitral Valve Insufficiency",
+        "Mitral Valve Stenosis",
+        "Pulmonary Atresia",
+        "Pulmonary Valve Insufficiency",
+        "Pulmonary Valve Stenosis",
+        "Tricuspid Atresia",
+        "Tricuspid Valve Insufficiency",
+        "Tricuspid Valve Stenosis"
+    ],
+    "Heart Defects, Congenital": [
+        "22q11 Deletion Syndrome",
+        "Alagille Syndrome",
+        "Aortic Coarctation",
+        "Arrhythmogenic Right Ventricular Dysplasia",
+        "Barth Syndrome",
+        "Cor Triatriatum",
+        "Coronary Vessel Anomalies",
+        "Crisscross Heart",
+        "Dextrocardia",
+        "Ductus Arteriosus, Patent",
+        "Ebstein Anomaly",
+        "Ectopia Cordis",
+        "Eisenmenger Complex",
+        "Heart Septal Defects",
+        "Heterotaxy Syndrome",
+        "Hypoplastic Left Heart Syndrome",
+        "Isolated Noncompaction of the Ventricular Myocardium",
+        "LEOPARD Syndrome",
+        "Levocardia",
+        "Long QT Syndrome",
+        "Marfan Syndrome",
+        "Noonan Syndrome",
+        "Tetralogy of Fallot",
+        "Transposition of Great Vessels",
+        "Tricuspid Atresia",
+        "Trilogy of Fallot",
+        "Trisomy 13 Syndrome",
+        "Trisomy 18 Syndrome",
+        "Turner Syndrome",
+        "Wolff-Parkinson-White Syndrome"
+    ]
+}
+
+
+
+# print(df.columns)
 
 # Initialize a dictionary to store the counts
-qualifier_counts = {term: 0 for term in mesh_descriptor_terms_cardio_diseases}
-qualifier_examples = {term: None for term in mesh_descriptor_terms_cardio_diseases}
+qualifier_counts = {term: 0 for term in mesh_descriptor_terms_cardio_cat.keys()}
 
 # Iterate over each row in the DataFrame
 filtered_rows = []
 
 for index, row in df.iterrows():
     if pd.notna(row['Abstract']):
-        for term in mesh_descriptor_terms_cardio_diseases:
-            if term in row['MeSH_Descriptors']:
-                qualifier_counts[term] += 1
-                if qualifier_examples[term] is None:
-                    qualifier_examples[term] = row['Abstract']
-                filtered_rows.append(row)
-                break
+        for category, sub_categories in mesh_descriptor_terms_cardio_cat.items():
+            try:
+                if any(sub_cat in row['MeSH_Descriptors'] for sub_cat in sub_categories):
+                    qualifier_counts[category] += 1
+                    row['category'] = category
+                    row['sub_category'] = [sub_cat for sub_cat in sub_categories if sub_cat in row['MeSH_Descriptors']]
+                    filtered_rows.append(row)
+                    break
+            except Exception as e:
+                print(e)
+                print(row['MeSH_Descriptors'])
+                print(sub_categories)
+                print()
+                exit()
 
 filtered_df = pd.DataFrame(filtered_rows)
 print(filtered_df.describe())
-print(filtered_df.columns)
+# print(filtered_df.columns)
 
 # Total articles with cardio diseases
 total_articles = sum(qualifier_counts.values())
@@ -195,6 +211,7 @@ print(f"Total articles with cardio diseases: {total_articles}")
 # Print the counts and examples
 for term, count in qualifier_counts.items():
     print(f"{term}: {count}")
+print()
 print()
 #print abstracts for each term
 # for term, count in qualifier_counts.items():
