@@ -13,6 +13,8 @@ output_file = args.output_file
 
 # Load the CSV file
 df = pd.read_csv(input_file)
+# print(f"total rows: {len(df)}")
+# exit()
 # print(df.describe())
 
 qualifier_terms_cardio_diseases = [
@@ -183,11 +185,11 @@ qualifier_counts = {term: 0 for term in mesh_descriptor_terms_cardio_cat.keys()}
 # Iterate over each row in the DataFrame
 filtered_rows = []
 
-for index, row in df.iterrows():
+for index, row in tqdm(df.iterrows(), total=len(df), desc="Processing rows"):
     if pd.notna(row['Abstract']):
         for category, sub_categories in mesh_descriptor_terms_cardio_cat.items():
             try:
-                if any(sub_cat in row['MeSH_Descriptors'] for sub_cat in sub_categories):
+                if any(sub_cat in row['MeSH_Descriptors'] for sub_cat in sub_categories) or category in row['MeSH_Descriptors']:
                     qualifier_counts[category] += 1
                     row['category'] = category
                     row['sub_category'] = [sub_cat for sub_cat in sub_categories if sub_cat in row['MeSH_Descriptors']]
@@ -198,7 +200,9 @@ for index, row in df.iterrows():
                 print(row['MeSH_Descriptors'])
                 print(sub_categories)
                 print()
-                exit()
+                
+            
+        
 
 filtered_df = pd.DataFrame(filtered_rows)
 print(filtered_df.describe())
