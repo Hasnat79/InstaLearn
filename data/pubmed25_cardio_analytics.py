@@ -71,23 +71,12 @@ df['PubDate_Year'].dropna().astype(int).value_counts().sort_index().plot(kind='b
 plt.title('Publication Year Distribution', fontsize=16, fontweight='bold')
 plt.xlabel('Year', fontsize=14, fontweight='bold')
 plt.ylabel('Count', fontsize=14, fontweight='bold')
-plt.xticks(fontsize=12, fontweight='bold')
-plt.yticks(fontsize=12, fontweight='bold')
+plt.xticks(fontsize=9, fontweight='bold')
+plt.yticks(fontsize=9, fontweight='bold')
 plt.tight_layout()
 plt.savefig(os.path.join(plots_dir, 'pubdate_year_distribution.png'))
 plt.close()
 
-# Plot the distribution of the 'Status' column
-plt.figure(figsize=(10, 6))
-df['Status'].value_counts().plot(kind='bar')
-plt.title('Status Distribution', fontsize=16, fontweight='bold')
-plt.xlabel('Status', fontsize=14, fontweight='bold')
-plt.ylabel('Count', fontsize=14, fontweight='bold')
-plt.xticks(rotation=15, fontsize=12, fontweight='bold')
-plt.yticks(fontsize=12, fontweight='bold')
-plt.tight_layout()
-plt.savefig(os.path.join(plots_dir, 'status_distribution.png'))
-plt.close()
 
 # Plot the distribution of the 'Journal_Title' column
 plt.figure(figsize=(14, 8))  # Increase the figure size
@@ -127,7 +116,8 @@ plt.close()
 
 # Plot the distribution of the 'sub_category' column
 plt.figure(figsize=(14, 8))  # Increase the figure size
-df['sub_category'].value_counts().head(10).plot(kind='bar')
+df['sub_category'].replace('[]', pd.NA, inplace=True)  # Replace empty list strings with NaN
+df['sub_category'].dropna().value_counts().head(10).plot(kind='bar')
 plt.title('Top 10 Sub-category Distribution', fontsize=16, fontweight='bold')
 plt.xlabel('Sub-category', fontsize=14, fontweight='bold')
 plt.ylabel('Count', fontsize=14, fontweight='bold')
