@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Base URL for the PubMed baseline data
 BASE_URL="https://ftp.ncbi.nlm.nih.gov/pubmed/baseline"
 
@@ -42,7 +41,7 @@ download_with_retry() {
 
 # Main download loop
 #1274
-for i in $(seq 832 1274); do
+for i in $(seq 1 1274); do
     download_with_retry $i
     
     # Add a small delay between downloads to be nice to the server
