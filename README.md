@@ -20,7 +20,7 @@ We thank [Prof. David Liem](https://physicians.ucdavis.edu/details/73579/david-l
 - We filter articles with abstracts that has matching MeSH Descriptions with Cardio Mesh Descriptors mentioned above
 
 ### 1.4 PubMed 25 Cardio Analytics 
-- Total Cardio Related Articles: 865506
+- Total Cardio Related Articles: 864244
 - Top Journal: The American journal of cardiology (19779 articles)
 - More details are covered in the [pubmed25_cardio_analytics](data/pubmed25_cardio_analytics.txt)
 
