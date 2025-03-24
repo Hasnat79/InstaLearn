@@ -7,16 +7,14 @@ Columns: Index(['PMID', 'PMID_Version', 'Title', 'Status', 'IndexingMethod', 'Ow
        'PublicationHistory', 'ArticleIDs', 'category', 'sub_category'],
       dtype='object')
 Description:
-                PMID   PMID_Version   PubDate_Year    PubDate_Day
-count  8.642440e+05  864244.000000  811408.000000  182508.000000
-mean   1.999714e+07       1.000019    2007.471516      12.860669
-std    1.115539e+07       0.004811      12.623840       9.432250
-min    1.570000e+02       1.000000    1949.000000       1.000000
-25%    1.032098e+07       1.000000    1999.000000       3.000000
-50%    2.040650e+07       1.000000    2010.000000      14.000000
-75%    2.940999e+07       1.000000    2018.000000      20.000000
-max    3.977600e+07       3.000000    2025.000000      31.000000
-Total rows: 864244
+           PMID PMID_Version  ...                   category sub_category
+count   865506       865506  ...                     865506       865506
+unique  864232            4  ...                          8         1127
+top       PMID            1  ...  Cerebrovascular Disorders   ['Stroke']
+freq      1262       864230  ...                     274314       149332
+
+[4 rows x 31 columns]
+Total rows: 865506
 Missing values:
  PMID                       0
 PMID_Version               0
@@ -53,22 +51,23 @@ dtype: int64
 =====================================
 Publication Year Distribution:
  PubDate_Year
-1949.0        8
-1950.0        5
-1951.0        6
-1952.0        4
-1953.0        6
-          ...  
-2021.0    33432
-2022.0    32896
-2023.0    30781
-2024.0    30515
-2025.0     1224
-Name: count, Length: 77, dtype: int64
+1949.0              8
+1950.0              5
+1951.0              6
+1952.0              4
+1953.0              6
+                ...  
+2022.0          32896
+2023.0          30781
+2024.0          30515
+2025.0           1224
+PubDate_Year     1262
+Name: count, Length: 78, dtype: int64
 =====================================
 Status Distribution:
  Status
 MEDLINE               864243
+Status                  1262
 PubMed-not-MEDLINE         1
 Name: count, dtype: int64
 =====================================
@@ -88,16 +87,16 @@ Name: count, dtype: int64
 =====================================
 Top 10 Authors:
  Authors
-Wilbert S Aronow (WS)    53
-Milton Packer (M)        50
-John E Madias (JE)       49
-L H Opie (LH)            47
-W S Aronow (WS)          43
-J N Cohn (JN)            43
-W B Kannel (WB)          37
-S H Taylor (SH)          35
-N K Wenger (NK)          34
-M Packer (M)             34
+Authors                  1262
+Wilbert S Aronow (WS)      53
+Milton Packer (M)          50
+John E Madias (JE)         49
+L H Opie (LH)              47
+J N Cohn (JN)              43
+W S Aronow (WS)            43
+W B Kannel (WB)            37
+S H Taylor (SH)            35
+M Packer (M)               34
 Name: count, dtype: int64
 =====================================
 Category Distribution:
@@ -109,34 +108,35 @@ Heart Failure                 73068
 Heart Defects, Congenital     70363
 Cardiomyopathies              57081
 Heart Valve Diseases          53175
+category                       1262
 Name: count, dtype: int64
 =====================================
 Sub-category Distribution:
  sub_category
-['Stroke']                                                                                                                                          149332
-[]                                                                                                                                                  148785
-['Myocardial Infarction']                                                                                                                            89048
-['Coronary Disease']                                                                                                                                 58402
-['Atrial Fibrillation']                                                                                                                              31953
-                                                                                                                                                     ...  
-['Aortic Coarctation', 'Ductus Arteriosus, Patent', 'Ebstein Anomaly', 'Heart Septal Defects', 'Transposition of Great Vessels']                         1
-['Aortic Valve Stenosis', 'Mitral Valve Stenosis', 'Pulmonary Valve Insufficiency', 'Pulmonary Valve Stenosis', 'Tricuspid Valve Insufficiency']         1
-['Coronary Vessel Anomalies', 'Ductus Arteriosus, Patent', 'Heart Septal Defects', 'Levocardia', 'Transposition of Great Vessels']                       1
-['Cardiomyopathy, Alcoholic', 'Cardiomyopathy, Dilated', 'Edema, Cardiac']                                                                               1
-['Ductus Arteriosus, Patent', 'Ebstein Anomaly', 'Heart Septal Defects', 'Tetralogy of Fallot', 'Transposition of Great Vessels']                        1
-Name: count, Length: 1126, dtype: int64
+['Stroke']                                                                                                  149332
+[]                                                                                                          148785
+['Myocardial Infarction']                                                                                    89048
+['Coronary Disease']                                                                                         58402
+['Atrial Fibrillation']                                                                                      31953
+                                                                                                             ...  
+['Aortic Coarctation', 'Heterotaxy Syndrome']                                                                    1
+['Brain Ischemia', 'Intracranial Arteriovenous Malformations', 'Stroke', 'Cerebrovascular Disorders']            1
+['Atrial Fibrillation', 'Tachycardia', 'Ventricular Fibrillation', 'Ventricular Flutter']                        1
+['Stroke', 'Vasculitis, Central Nervous System', 'Vasospasm, Intracranial', 'Cerebrovascular Disorders']         1
+['Tetralogy of Fallot', 'Trisomy 13 Syndrome', 'Trisomy 18 Syndrome']                                            1
+Name: count, Length: 1127, dtype: int64
 =====================================
 Top 10 MeSH Headings:
  MeSHHeadings_Full
-Activities of Daily Living (UI: D000203, Major: No); Aged (UI: D000368, Major: No); Aged, 80 and over (UI: D000369, Major: No); Alzheimer Disease (UI: D000544, Major: No) - Qualifiers: drug therapy (UI: Q000188, Major: No); Cognition Disorders (UI: D003072, Major: No) - Qualifiers: drug therapy (UI: Q000188, Major: No); Dementia (UI: D003704, Major: No) - Qualifiers: drug therapy (UI: Q000188, Major: Yes); Dementia, Vascular (UI: D015140, Major: No) - Qualifiers: drug therapy (UI: Q000188, Major: No); Excitatory Amino Acid Antagonists (UI: D018691, Major: No) - Qualifiers: therapeutic use (UI: Q000627, Major: Yes); Humans (UI: D006801, Major: No); Memantine (UI: D008559, Major: No) - Qualifiers: therapeutic use (UI: Q000627, Major: Yes); Randomized Controlled Trials as Topic (UI: D016032, Major: No)    6
-Humans (UI: D006801, Major: No); Atrial Fibrillation (UI: D001281, Major: Yes) - Qualifiers: surgery (UI: Q000601, Major: No)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 5
-Aortic Valve (UI: D001021, Major: No) - Qualifiers: surgery (UI: Q000601, Major: No); Aortic Valve Stenosis (UI: D001024, Major: Yes) - Qualifiers: surgery (UI: Q000601, Major: No); Heart Valve Prosthesis (UI: D006350, Major: Yes); Humans (UI: D006801, Major: No); Prosthesis Design (UI: D011474, Major: No); Transcatheter Aortic Valve Replacement (UI: D065467, Major: Yes); Treatment Outcome (UI: D016896, Major: No)                                                                                                                                                                                                                                                                                                                                                                                                             5
-Aortic Valve (UI: D001021, Major: No) - Qualifiers: diagnostic imaging (UI: Q000000981, Major: No); surgery (UI: Q000601, Major: No); Aortic Valve Stenosis (UI: D001024, Major: Yes) - Qualifiers: diagnostic imaging (UI: Q000000981, Major: No); surgery (UI: Q000601, Major: No); Heart Valve Prosthesis (UI: D006350, Major: Yes); Humans (UI: D006801, Major: No); Prosthesis Design (UI: D011474, Major: No); Transcatheter Aortic Valve Replacement (UI: D065467, Major: Yes) - Qualifiers: adverse effects (UI: Q000009, Major: No); Treatment Outcome (UI: D016896, Major: No)                                                                                                                                                                                                                                                      5
-Algorithms (UI: D000465, Major: Yes); Arrhythmias, Cardiac (UI: D001145, Major: No) - Qualifiers: diagnosis (UI: Q000175, Major: Yes); physiopathology (UI: Q000503, Major: Yes); Artificial Intelligence (UI: D001185, Major: No); Diagnosis, Computer-Assisted (UI: D003936, Major: No) - Qualifiers: methods (UI: Q000379, Major: Yes); Electrocardiography (UI: D004562, Major: No) - Qualifiers: methods (UI: Q000379, Major: Yes); Heart Rate (UI: D006339, Major: Yes); Humans (UI: D006801, Major: No); Pattern Recognition, Automated (UI: D010363, Major: No) - Qualifiers: methods (UI: Q000379, Major: Yes); Reproducibility of Results (UI: D015203, Major: No); Sensitivity and Specificity (UI: D012680, Major: No)                                                                                                            5
-Fibrinolytic Agents (UI: D005343, Major: No) - Qualifiers: therapeutic use (UI: Q000627, Major: Yes); Humans (UI: D006801, Major: No); Myocardial Infarction (UI: D009203, Major: No) - Qualifiers: drug therapy (UI: Q000188, Major: Yes)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    5
-Heart Failure (UI: D006333, Major: No) - Qualifiers: therapy (UI: Q000628, Major: Yes); Humans (UI: D006801, Major: No)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       5
-Atrial Fibrillation (UI: D001281, Major: No) - Qualifiers: surgery (UI: Q000601, Major: Yes); Catheter Ablation (UI: D017115, Major: Yes); Humans (UI: D006801, Major: No)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    5
-Atrial Fibrillation (UI: D001281, Major: Yes) - Qualifiers: diagnosis (UI: Q000175, Major: No); surgery (UI: Q000601, Major: No); Catheter Ablation (UI: D017115, Major: Yes); Humans (UI: D006801, Major: No); Pulmonary Veins (UI: D011667, Major: Yes) - Qualifiers: diagnostic imaging (UI: Q000000981, Major: No); surgery (UI: Q000601, Major: No); Recurrence (UI: D012008, Major: No); Treatment Outcome (UI: D016896, Major: No)                                                                                                                                                                                                                                                                                                                                                                                                     5
-Electrocardiography (UI: D004562, Major: Yes); Humans (UI: D006801, Major: No); Myocardial Infarction (UI: D009203, Major: No) - Qualifiers: diagnosis (UI: Q000175, Major: Yes)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              4
+MeSHHeadings_Full                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             1262
+Activities of Daily Living (UI: D000203, Major: No); Aged (UI: D000368, Major: No); Aged, 80 and over (UI: D000369, Major: No); Alzheimer Disease (UI: D000544, Major: No) - Qualifiers: drug therapy (UI: Q000188, Major: No); Cognition Disorders (UI: D003072, Major: No) - Qualifiers: drug therapy (UI: Q000188, Major: No); Dementia (UI: D003704, Major: No) - Qualifiers: drug therapy (UI: Q000188, Major: Yes); Dementia, Vascular (UI: D015140, Major: No) - Qualifiers: drug therapy (UI: Q000188, Major: No); Excitatory Amino Acid Antagonists (UI: D018691, Major: No) - Qualifiers: therapeutic use (UI: Q000627, Major: Yes); Humans (UI: D006801, Major: No); Memantine (UI: D008559, Major: No) - Qualifiers: therapeutic use (UI: Q000627, Major: Yes); Randomized Controlled Trials as Topic (UI: D016032, Major: No)       6
+Humans (UI: D006801, Major: No); Atrial Fibrillation (UI: D001281, Major: Yes) - Qualifiers: surgery (UI: Q000601, Major: No)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    5
+Aortic Valve (UI: D001021, Major: No) - Qualifiers: surgery (UI: Q000601, Major: No); Aortic Valve Stenosis (UI: D001024, Major: Yes) - Qualifiers: surgery (UI: Q000601, Major: No); Heart Valve Prosthesis (UI: D006350, Major: Yes); Humans (UI: D006801, Major: No); Prosthesis Design (UI: D011474, Major: No); Transcatheter Aortic Valve Replacement (UI: D065467, Major: Yes); Treatment Outcome (UI: D016896, Major: No)                                                                                                                                                                                                                                                                                                                                                                                                                5
+Aortic Valve (UI: D001021, Major: No) - Qualifiers: diagnostic imaging (UI: Q000000981, Major: No); surgery (UI: Q000601, Major: No); Aortic Valve Stenosis (UI: D001024, Major: Yes) - Qualifiers: diagnostic imaging (UI: Q000000981, Major: No); surgery (UI: Q000601, Major: No); Heart Valve Prosthesis (UI: D006350, Major: Yes); Humans (UI: D006801, Major: No); Prosthesis Design (UI: D011474, Major: No); Transcatheter Aortic Valve Replacement (UI: D065467, Major: Yes) - Qualifiers: adverse effects (UI: Q000009, Major: No); Treatment Outcome (UI: D016896, Major: No)                                                                                                                                                                                                                                                         5
+Atrial Fibrillation (UI: D001281, Major: No) - Qualifiers: surgery (UI: Q000601, Major: Yes); Catheter Ablation (UI: D017115, Major: Yes); Humans (UI: D006801, Major: No)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       5
+Heart Failure (UI: D006333, Major: No) - Qualifiers: therapy (UI: Q000628, Major: Yes); Humans (UI: D006801, Major: No)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          5
+Fibrinolytic Agents (UI: D005343, Major: No) - Qualifiers: therapeutic use (UI: Q000627, Major: Yes); Humans (UI: D006801, Major: No); Myocardial Infarction (UI: D009203, Major: No) - Qualifiers: drug therapy (UI: Q000188, Major: Yes)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       5
+Atrial Fibrillation (UI: D001281, Major: Yes) - Qualifiers: diagnosis (UI: Q000175, Major: No); surgery (UI: Q000601, Major: No); Catheter Ablation (UI: D017115, Major: Yes); Humans (UI: D006801, Major: No); Pulmonary Veins (UI: D011667, Major: Yes) - Qualifiers: diagnostic imaging (UI: Q000000981, Major: No); surgery (UI: Q000601, Major: No); Recurrence (UI: D012008, Major: No); Treatment Outcome (UI: D016896, Major: No)                                                                                                                                                                                                                                                                                                                                                                                                        5
+Algorithms (UI: D000465, Major: Yes); Arrhythmias, Cardiac (UI: D001145, Major: No) - Qualifiers: diagnosis (UI: Q000175, Major: Yes); physiopathology (UI: Q000503, Major: Yes); Artificial Intelligence (UI: D001185, Major: No); Diagnosis, Computer-Assisted (UI: D003936, Major: No) - Qualifiers: methods (UI: Q000379, Major: Yes); Electrocardiography (UI: D004562, Major: No) - Qualifiers: methods (UI: Q000379, Major: Yes); Heart Rate (UI: D006339, Major: Yes); Humans (UI: D006801, Major: No); Pattern Recognition, Automated (UI: D010363, Major: No) - Qualifiers: methods (UI: Q000379, Major: Yes); Reproducibility of Results (UI: D015203, Major: No); Sensitivity and Specificity (UI: D012680, Major: No)                                                                                                               5
 Name: count, dtype: int64
 =====================================
