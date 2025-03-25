@@ -45,4 +45,9 @@ We thank [Prof. David Liem](https://physicians.ucdavis.edu/details/73579/david-l
     <img src="data/plots/top_10_sub_category_distribution.png" alt="Top 10 Sub-Category Distribution">
 </details>
 
+<details>
+    <summary>Abstract Word Count Distribution</summary>
+    <img src="data/plots/abstract_word_count_distribution.png" alt="Abstract Word Count Distribution">
+</details>
+
 
