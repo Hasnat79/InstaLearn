@@ -126,3 +126,16 @@ plt.yticks(fontsize=12, fontweight='bold')
 plt.tight_layout()  # Adjust layout to fit everything
 plt.savefig(os.path.join(plots_dir, 'top_10_sub_category_distribution.png'))
 plt.close()
+
+# Plot the distribution of the 'Abstract' word count
+df['Abstract_Word_Count'] = df['Abstract'].dropna().apply(lambda x: len(x.split()))
+plt.figure(figsize=(14, 8))
+df['Abstract_Word_Count'].plot(kind='hist', bins=50)
+plt.title('Abstract Word Count Distribution', fontsize=16, fontweight='bold')
+plt.xlabel('Word Count', fontsize=14, fontweight='bold')
+plt.ylabel('Frequency', fontsize=14, fontweight='bold')
+plt.xticks(fontsize=12, fontweight='bold')
+plt.yticks(fontsize=12, fontweight='bold')
+plt.tight_layout()
+plt.savefig(os.path.join(plots_dir, 'abstract_word_count_distribution.png'))
+plt.close()
