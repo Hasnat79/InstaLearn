@@ -7,6 +7,7 @@
 - Cerebrovascular Disorders
 - Myocardial Ischemia
 - Cardiomyopathies
+- Heart Failure
 - Arrhythmias, Cardiac
 - Heart Valve Diseases
 - Heart Defects, Congenital
