@@ -1,5 +1,23 @@
 #!/bin/bash
 
+#sbatch --get-user-env=L                #replicate login env
+
+##NECESSARY JOB SPECIFICATIONS
+#SBATCH --job-name=download_pubmed_25      #Set the job name to "JobExample4"
+#SBATCH --time=05:00:00              #Set the wall clock limit to 1hr and 30min
+#SBATCH --nodes=1                #Request 1 node
+#SBATCH --ntasks-per-node=1        #Request 8 tasks/cores per node
+#SBATCH --mem=32G                     #Request 16GB per node
+#SBATCH --output=download_pubmed_25.%j      #Send stdout/err to "Example4Out.[jobID]"
+#SBATCH --gres=gpu:rtx:1          #Request 2 GPU per node can be 1 or 2
+#SBATCH --partition=gpu              #Request the GPU partition/queue
+
+
+
+
+# Script to download PubMed XML files from NCBI FTP server
+# Downloads files from pubmed25n0001.xml.gz to pubmed25n1274.xml.gz
+
 # Base URL for the PubMed baseline data
 BASE_URL="https://ftp.ncbi.nlm.nih.gov/pubmed/baseline"
 
