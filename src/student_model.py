@@ -68,7 +68,7 @@ class StudentModel:
         # Extract the assistant's response (should be just the predicted word)
         assistant_response = response.split("<|assistant|>")[-1].strip()
         # print(f"assistant_response:\n{assistant_response}")
-
+        print("assistant_response:\n", assistant_response)
         # Take the first word of the response as the prediction
         match = re.search(r'"([^"]*)"', assistant_response)
         predicted_word = match.group(1) if match else ""
@@ -88,7 +88,7 @@ class StudentModel:
             evaluation_results (list): Detailed results of each keyword prediction
         """
         keywords = teacher_model.extract_keywords(text_chunk)
-        print(f"Keywords: {keywords}")
+        # print(f"Keywords: {keywords}")
         if not keywords:
             print(f"No keywords found in the chunk.")
             return False, 0.0, []
@@ -98,9 +98,9 @@ class StudentModel:
 
         for keyword in keywords:
             masked_sentence = create_masked_sentence(text_chunk, keyword)
-            print(f"\nmasked_sentence: {masked_sentence}")
+            # print(f"\nmasked_sentence: {masked_sentence}")
             predicted_word = self.predict_masked_word(masked_sentence)
-            print(f"predicted_word: {predicted_word}")
+            # print(f"predicted_word: {predicted_word}")
             is_correct = keyword.lower() in predicted_word.lower()
             if is_correct:
                 correct_predictions += 1
@@ -126,9 +126,9 @@ class StudentModel:
         chunks_for_fintuning = []
         total_chunks = len(test_corpus)
         for i, chunk in enumerate(tqdm(test_corpus, desc="Evaluating chunks", unit="chunk")):
-            print(f"Abstract {i}/{total_chunks}: ")
+            # print(f"Abstract {i}/{total_chunks}: ")
             needs_finetuning, accuracy, evaluation_results = self.evaluate_chunk(teacher_model, chunk)
-            print(f"needs_finetuning: {needs_finetuning}, accuracy: {accuracy}")
+            # print(f"needs_finetuning: {needs_finetuning}, accuracy: {accuracy}")
             # break
             chunk_details = {
             "chunk_id": i,
@@ -140,7 +140,7 @@ class StudentModel:
             evaluation_details.append(chunk_details)
             if needs_finetuning:
                 chunks_for_fintuning.append(chunk_details)
-            print("*"*50)
+            # print("*"*50)
         return chunks_for_fintuning, evaluation_details
     def format_for_finetuning(self, example):
         """
@@ -268,8 +268,9 @@ class StudentModel:
                     lora_dropout=0.05,
                     learning_rate=2e-4,
                     num_epochs=3,
-                    batch_size=8,
-                    gradient_accumulation_steps=4):
+                    batch_size=4,
+                    gradient_accumulation_steps=4,
+                    checkpoint_dir=None):
         """
         Train the model using LoRA fine-tuning on the given dataset.
         
@@ -333,7 +334,7 @@ class StudentModel:
         
         # Define the training arguments
         training_args = TrainingArguments(
-            output_dir=f"./lora_finetuned_model",
+            output_dir=f"{checkpoint_dir}/finetuned_model_checkpoints_{len(dataset)}_samples",
             per_device_train_batch_size=batch_size,
             gradient_accumulation_steps=gradient_accumulation_steps,
             learning_rate=learning_rate,
@@ -367,8 +368,8 @@ class StudentModel:
         trainer.save_metrics("train", trainer.state.log_history[-1])
         # trainer.save_state()
         # Save the fine-tuned model
-        self.model.save_pretrained(f"./lora_finetuned_model_{len(dataset)}_samples")
-        self.tokenizer.save_pretrained(f"./lora_finetuned_model_{len(dataset)}_samples")
+        self.model.save_pretrained(f"{checkpoint_dir}/final_finetuned_model_{len(dataset)}_finetune_samples")
+        self.tokenizer.save_pretrained(f"{checkpoint_dir}/final_finetuned_model_{len(dataset)}_finetune_samples")
         
         print("LoRA fine-tuning completed successfully.")
         return self.model
@@ -410,8 +411,34 @@ class StudentModel:
             
             # Decode and return the generated response
             generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=False)
-            print(f"\n\ngenerated_text:\n{generated_text}")
+            # print(f"\n\ngenerated_text:\n{generated_text}")
             # Extract only the response part (after [/INST])
             response = generated_text.split("[/INST]")[-1].replace("</s>", "").strip()
             
             return response
+    def process_inference_to_one_word(self, response):
+        from transformers import AutoTokenizer, AutoModelForCausalLM
+        # Load a model like Llama, Mistral, or Pythia
+        model_name = "meta-llama/Llama-2-7b-chat-hf"  # or another open source model
+        
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        model = AutoModelForCausalLM.from_pretrained(model_name)
+        
+        prompt = f"""
+        From the following text, extract ONLY the probable word. Return just this single word:
+        
+        {response}
+        """
+        
+        inputs = tokenizer(prompt, return_tensors="pt")
+        outputs = model.generate(
+            inputs.input_ids,
+            max_new_tokens=10,  # Keep output very short
+            temperature=0.1,    # Low temperature for deterministic output
+        )
+        
+        response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+        
+        # Simple post-processing to extract just the word
+        response = response.split(prompt)[-1].strip()
+        return response
