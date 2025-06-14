@@ -7,11 +7,11 @@ class PubMedCardioLoader:
         # print(self.dataset)
         print(f"Loaded dataset: {dataset_name}")
 
-    def __iter__(self):
-        """Returns an iterator over the dataset."""
-        for split in self.dataset:
-            for item in self.dataset[split]:
-                yield item
+    # def __iter__(self):
+    #     """Returns an iterator over the dataset."""
+    #     for split in self.dataset:
+    #         for item in self.dataset[split]:
+    #             yield item
     def __len__(self):
         """Returns the total number of items in the dataset."""
         return sum(len(self.dataset[split]) for split in self.dataset)
