@@ -175,3 +175,16 @@ archive
 *.xml
 *.csv
 archive
+datasets
+hub
+logs
+*.txt
+hprc_logs
+checkpoints
+3B_lora_trained_models
+evaluation_results
+finetuning_datasets
+modules
+post_train_evaluation_results
+*_out.*
+*_Out.*
