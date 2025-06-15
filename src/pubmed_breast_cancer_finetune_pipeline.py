@@ -1,17 +1,14 @@
 import os
 from teacher_model import TeacherModel
 from student_model import StudentModel
-from pubmed_cardio_loader import PubMedCardioLoader
+from pubmed_breast_cancer_loader import PubMedBreastCancerLoader
 from utils import prepare_finetuning_dataset
 import transformers
 import huggingface_hub
 import torch
 from dataclasses import dataclass, field
-# Set the Hugging Face token for authentication
-# huggingface_hub.login(token="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")
 
-# Alternative: Set as environment variable
-# os.environ["HUGGINGFACE_TOKEN"] = "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"
+
 from datasets import Dataset
 from typing import Dict, Optional
 
@@ -61,13 +58,13 @@ def main():
     if not os.path.exists(training_args.train['evaluation_results_path']):
         teacher_model = TeacherModel(model_args.model['teacher_model_id'])
         student_model = StudentModel(model_args.model['student_model_id'])
-        pubmed_cardio_dataset = PubMedCardioLoader(data_args.data['pubmed_cardio_hf_data_id'])
-        print(f"size of dataset: {len(pubmed_cardio_dataset)}")
+        pubmed_breast_cancer_dataset = PubMedBreastCancerLoader(data_args.data['pubmed_cardio_hf_data_id'])
+        print(f"size of dataset: {len(pubmed_breast_cancer_dataset)}")
 
         # load test corpus based on start and end index
         test_corpus = []
         for i in range(data_args.data['start_idx'], data_args.data['end_idx']):
-            item = pubmed_cardio_dataset.dataset['train'][i]
+            item = pubmed_breast_cancer_dataset.dataset['train'][i]
             test_corpus.append(item["Abstract"])
 
         print(f"Loaded {len(test_corpus)} abstracts from the dataset")
