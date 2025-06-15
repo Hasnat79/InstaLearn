@@ -19,6 +19,5 @@ new_dataset = Dataset.from_pandas(new_data)
 dataset = DatasetDict({"train": new_dataset})
 
 print(dataset)
-# dataset.push_to_hub("hasnat79/pubmed25_cardio",token="HF_TOKEN")
-dataset.push_to_hub("hasnat79/pubmed_breast_cancer",token="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")
+dataset.push_to_hub("link_to_your_hf_repo/pubmed_breast_cancer", private=True, token="your_hf_token")
 
