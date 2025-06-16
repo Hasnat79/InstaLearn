@@ -2,7 +2,7 @@
 
 ## Environment setup
 ```bash 
-source activate env_setup.sh
+source env_setup.sh
 cd InstaLearn
 ```
 
