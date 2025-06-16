@@ -1,0 +1,17 @@
+data:
+  pubmed_cardio_hf_data_id: "InstaLearn/pubmed25_breast_cancer"
+  start_idx: 0 # modify this index as needed
+  end_idx: 100 # modify this index as needed
+  finetune_dataset_path: "/scratch/group/instalearn/InstaLearn/src/finetuning_datasets/llama1B_breast_cancer_finetune_dataset_100_abstracts" #modify this path as needed
+
+model: 
+  model_name : "llama1B"
+  teacher_model_id: "meta-llama/Llama-3.2-1B-Instruct" # modify this path as needed
+  student_model_id: "meta-llama/Llama-3.2-1B-Instruct" # modify this path as needed
+  checkpoint_dir: "../checkpoints/llama1B_breast_cancer" #modify this path as needed
+
+train:
+  train_student: true 
+  # evaluate_student: true 
+  evaluation_results_path: "evaluation_results/llama1B_breast_cancer_evaluation_results_abstracts_0_100.json" #modify this path as needed
+  epochs: 10
