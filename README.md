@@ -10,7 +10,7 @@ source env_setup.sh
 - pubmed25_breast_cancer: [pubmed_breast_cancer_loader.py](src/pubmed_breast_cancer_loader.py)
 
 ## Finetune Pipeline [Instalearn Methodology]
-- setup config in [](configs/llama3.2_1B_breast_cancer.yaml)
+- setup config in [llama3.2_1B_breast_cancer.yaml](configs/llama3.2_1B_breast_cancer.yaml) for instance.
 
 - Run finetune pipeline. Example
 ```bash 
