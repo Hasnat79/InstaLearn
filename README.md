@@ -1,6 +1,6 @@
 # Repository for "InstaLearn: Continual Knowledge Updates for Domain Adaptation"
 
-## environment setup
+## Environment setup
 ```bash 
 source activate env_setup.sh
 cd InstaLearn
