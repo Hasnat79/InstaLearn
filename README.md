@@ -7,7 +7,7 @@ source env_setup.sh
 
 ## Dataset Loading
 - pubmed25_cardio: [pubmed_cardio_loader.py](src/pubmed_cardio_loader.py)
-- pubmed25_breast_cancer: [pubmed_breast_cancer_loader.py](/InstaLearn/src/pubmed_breast_cancer_loader.py)
+- pubmed25_breast_cancer: [pubmed_breast_cancer_loader.py](src/pubmed_breast_cancer_loader.py)
 
 ## Finetune Pipeline [Instalearn Methodology]
 - setup config in [](configs/llama3.2_1B_breast_cancer.yaml)
