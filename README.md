@@ -1,53 +1,31 @@
-# Insta Learn
+# Repository for "InstaLearn: Continual Knowledge Updates for Domain Adaptation"
+
+## environment setup
+```bash 
+source activate env_setup.sh
+cd InstaLearn
+```
+
+## Dataset Loading
+- pubmed25_cardio: [pubmed_cardio_loader.py](/InstaLearn//src/pubmed_cardio_loader.py)
+- pubmed25_breast_cancer: [pubmed_breast_cancer_loader.py](/InstaLearn/src/pubmed_breast_cancer_loader.py)
+
+## Finetune Pipeline [Instalearn Methodology]
+- setup config in [](/InstaLearn/configs/llama3.2_1B_breast_cancer.yaml)
+
+- Run finetune pipeline. Example
+```bash 
+python pubmed_breast_cancer_finetune_pipeline.py ../configs/qwen25_1.5B_breast_cancer.yaml
+```
+- checkpionts are saved in `/InstaLearn/checkpoints` folder
+
+## Evaluation
+- load model from the checkpoints folders after training.
+- Our Trained models can be found in [InstaLearn/finetuned_models](https://huggingface.co/InstaLearn/finetuned_models)
+- evaluation scripts can be found in [pubmedqa_eval.ipynb](/InstaLearn/pubmedqa_eval.ipynb) file. 
 
 
-## 1 Dataset Collection
-### 1.1 Name: PubMed25 Cardio
-### 1.2 Cardio Mesh Descriptors (Parents)
-- Cerebrovascular Disorders
-- Myocardial Ischemia
-- Cardiomyopathies
-- Heart Failure
-- Arrhythmias, Cardiac
-- Heart Valve Diseases
-- Heart Defects, Congenital
 
-We thank [Prof. David Liem](https://physicians.ucdavis.edu/details/73579/david-liem-cardiovascular_medicine-sacramento) for creating and providing the mesh descriptors tree for Cardiovascular Diseases.
 
-### 1.3 Curation Process
-- We downloaded raw xml files from [pubmed25](https://ftp.ncbi.nlm.nih.gov/pubmed/baseline/)
-- Total files: 1274 (filename example: pubmed25n0001.xml)
-- Total Articles: 38,202,567 (38M)
-- We filter articles with abstracts that has matching MeSH Descriptions with Cardio Mesh Descriptors mentioned above
-
-### 1.4 PubMed 25 Cardio Analytics 
-- Total Cardio Related Articles: 864244
-- Top Journal: The American journal of cardiology (19779 articles)
-- More details are covered in the [pubmed25_cardio_analytics](data/pubmed25_cardio_analytics.txt)
-
-<details>
-    <summary>Category Distribution</summary>
-    <img src="data/plots/category_distribution.png" alt="Category Distribution">
-</details>
-
-<details>
-    <summary>Publication Date Year Distribution</summary>
-    <img src="data/plots/pubdate_year_distribution.png" alt="Publication Date Year Distribution">
-</details>
-
-<details>
-    <summary>Top 10 Journals</summary>
-    <img src="data/plots/top_10_journals.png" alt="Top 10 Journals">
-</details>
-
-<details>
-    <summary>Top 10 Sub-Category Distribution</summary>
-    <img src="data/plots/top_10_sub_category_distribution.png" alt="Top 10 Sub-Category Distribution">
-</details>
-
-<details>
-    <summary>Abstract Word Count Distribution</summary>
-    <img src="data/plots/abstract_word_count_distribution.png" alt="Abstract Word Count Distribution">
-</details>
 
 
