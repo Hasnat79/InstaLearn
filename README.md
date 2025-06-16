@@ -3,7 +3,6 @@
 ## Environment setup
 ```bash 
 source env_setup.sh
-cd InstaLearn
 ```
 
 ## Dataset Loading
