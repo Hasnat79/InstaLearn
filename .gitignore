@@ -188,3 +188,5 @@ modules
 post_train_evaluation_results
 *_out.*
 *_Out.*
+*_hf*
+run.sh
